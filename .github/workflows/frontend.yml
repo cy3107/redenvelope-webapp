@@ -1,0 +1,36 @@
+name: Frontend CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    env:
+      MASTRA_API_KEY: ${{ secrets.MASTRA_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'yarn'
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Type check
+        run: yarn typecheck
+      - name: Lint
+        run: yarn lint
+      - name: Unit tests
+        run: yarn test:ci
+      - name: Build
+        run: yarn build
+      - name: E2E tests
+        run: yarn test:e2e:ci
+      - name: Mastra AI Review
+        if: env.MASTRA_API_KEY != ''
+        run: npx mastra review --config mastra.config.json
+        env:
+          MASTRA_API_KEY: ${{ secrets.MASTRA_API_KEY }}
+        continue-on-error: true

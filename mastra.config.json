@@ -1,0 +1,7 @@
+{
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["dist/**", "node_modules/**", "tests/**"],
+  "rules": {
+    "maxComments": 200
+  }
+}
