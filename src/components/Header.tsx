@@ -13,7 +13,7 @@ export default function Header() {
       <h1 className="text-5xl font-bold mb-4 animate-float">
         🧧 RedEnvelope DApp
       </h1>
-      <p className="text-xl mb-6 opacity-90">去中心化红包系统</p>
+      <p className="text-xl mb-6 opacity-90">芝麻糊   去中心化红包系统</p>
       
       <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 max-w-md mx-auto">
         {!account ? (
